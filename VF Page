@@ -1,0 +1,33 @@
+<apex:page controller="opportunityWrapper" lightningStyleSheets="true" showHeader="false"  sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="true">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageblockSection title="All Accounts" collapsible="false" columns="2">
+                
+                       <!---Showing Accounts Record-->
+                
+                <apex:pageBlockTable value="{!accWrapList}" var="accWrap" id="pbTable1" title="All Accounts">
+                    <apex:column >
+                        <apex:inputCheckbox value="{!accWrap.isSelected}"/>
+                    </apex:column>
+                    <apex:column value="{!accWrap.acc.Name}"/>
+                    <apex:column value="{!accWrap.acc.Industry}"/>
+                    <apex:column value="{!accWrap.acc.Phone}"/>
+                </apex:pageBlockTable>
+                   
+                         <!---Showing Accounts Record-->
+                
+                <apex:pageBlockTable value="{!opportunityList}" var="opp" id="pbTable2" title="Related Opportunities">
+                    <apex:column value="{!opp.Account.Name}" headerValue="Account Name"/>
+                    <apex:column value="{!opp.Name}" headerValue="Opportunity Name"/>
+                    <apex:column value="{!opp.CloseDate}" headerValue="CloseDate"/>
+                    <apex:column value="{!opp.StageName}" headerValue="Stage Name"/>
+                </apex:pageBlockTable>
+            </apex:pageblockSection>
+                                            <!----Button---->
+            <center>
+                 <apex:commandButton value="Show Selected Accounts" action="{!getSelectedAccounts}" rerender="pbTable2"/>
+            </center>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
