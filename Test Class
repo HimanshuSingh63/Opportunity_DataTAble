@@ -1,0 +1,38 @@
+@isTest
+private class opportunityWrapperTest {
+    
+    @isTest static void testOpportunityWrapper() {
+        
+        // Create test data
+        Account acc1 = new Account(Name='Test Account 1', Type='Customer', Industry='Technology', Phone='1234567890');
+        insert acc1;
+        Opportunity opp1 = new Opportunity(Name='Test Opportunity 1', AccountId=acc1.Id, CloseDate=Date.today(), StageName='Prospecting');
+        insert opp1;
+        
+        Account acc2 = new Account(Name='Test Account 2', Type='Customer', Industry='Technology', Phone='1234567890');
+        insert acc2;
+        Opportunity opp2 = new Opportunity(Name='Test Opportunity 2', AccountId=acc2.Id, CloseDate=Date.today(), StageName='Prospecting');
+        insert opp2;
+        
+
+        
+        // Instantiate opportunityWrapper class
+        opportunityWrapper oppWrapper = new opportunityWrapper();
+        
+        // Check that the accWrapList is not empty and contains the correct number of records
+        System.assertNotEquals(oppWrapper.accWrapList, null);
+        System.assertEquals(oppWrapper.accWrapList.size(), 2);
+        
+        // Select the first account in the accWrapList
+        oppWrapper.accWrapList[0].isSelected = true;
+        
+        // Call the getSelectedAccounts method
+        oppWrapper.getSelectedAccounts();
+        
+        // Check that the opportunityList is not empty and contains the correct number of records
+        System.assertNotEquals(oppWrapper.opportunityList, null);
+        System.assertEquals(oppWrapper.opportunityList.size(), 1);
+        
+       
+    }
+}
